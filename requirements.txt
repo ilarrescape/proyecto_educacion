@@ -13,5 +13,7 @@ pillow
 qrcode
 opencv-python
 pyzbar
+folium
+streamlit_folium
 
 
