@@ -136,9 +136,9 @@ class DataManagerInstitucion():
                         latitud_direccion = st.number_input('Latitud: ')
                     with col_long:
                         longitud_direccion = st.number_input('Longitud: ')
-            c1,c2 = st.columns([8,1])
+            c1,c2 = st.columns([5,1])
             with c2:
-                if st.button('Agregar Datos', use_container_width=True):
+                if st.button('Agregar Datos', use_container_width=True, type='primary'):
                     if not nombre_institucion:
                         with col_I:
                             st.error('Falta el nombre de la institución')
@@ -150,14 +150,13 @@ class DataManagerInstitucion():
                         lista_id_direccion = self.db_direcciones.obtener_id_direccion(calle_direccion, numero_direccion)
                         self.db_instituciones.agregar_datos(nombre_institucion, lista_id_direccion[0]['id_direccion'], dic_tipo_institucion[tipo_institucion], telefono_institucion, email_institucion, gestión_institucion)
                         st.rerun()
+def fun_instituciones():
+    objeto = DataManagerInstitucion()
 
-# st.set_page_config(layout="wide")
-# objeto = DataManagerInstitucion()
+    data_instituciones, data_localidades, data_tipo_instituciones, data_direcciones = objeto.mostrar_datos()
 
-# data_instituciones, data_localidades, data_tipo_instituciones, data_direcciones = objeto.mostrar_datos()
+    objeto.agregar_registro(data_instituciones, data_localidades,data_tipo_instituciones, data_direcciones)
+    df_instituciones = pd.DataFrame(data_instituciones)
+    df_instituciones['Teléfono'] = df_instituciones['Teléfono'].apply(formatear_numero)
 
-# objeto.agregar_registro(data_instituciones, data_localidades,data_tipo_instituciones, data_direcciones)
-# df_instituciones = pd.DataFrame(data_instituciones)
-# df_instituciones['Teléfono'] = df_instituciones['Teléfono'].apply(formatear_numero)
-
-# st.dataframe(df_instituciones, use_container_width=True,hide_index=True)
+    st.dataframe(df_instituciones, use_container_width=True,hide_index=True)

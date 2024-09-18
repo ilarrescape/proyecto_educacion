@@ -24,3 +24,13 @@ class ClaseOrientacionCarrera:
     def agregar_datos(self,nombre_orientacion):
         self.cursor.execute('INSERT INTO orientacion_carrera(nombre_orientacion_carrera) VALUES (%s)',(nombre_orientacion,))
         self.connection.commit()
+
+class DataManagerOrientacion():
+    def __init__(self) -> None:
+        self.db_orientaciones = ClaseOrientacionCarrera()
+        
+    def agregar_registro(self, data_orientaciones):
+        nombre_orientacion = st.text_input('Nombre de la Disciplina: ')
+        if st.button('Agregar Disciplina'):
+            self.db_orientaciones.agregar_datos(nombre_orientacion)
+            return False
