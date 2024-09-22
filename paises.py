@@ -27,4 +27,10 @@ class ClasePais:
         nuevo_id = lista_diccionario_pais[0]['id_pais'] + 1
         self.cursor.execute('INSERT INTO pais(id_pais, nombre_pais) VALUES (%s, %s)',(nuevo_id,nombre_pais))
         self.connection.commit()
+        
 
+objeto = ClasePais()
+
+st.write(objeto.obtener_datos())
+diccionario = objeto.agregar_datos('Colombia')
+st.write(objeto.obtener_datos())
