@@ -32,15 +32,19 @@ m = folium.Map(location=[-37.259411, -56.971661], zoom_start=12, tiles="CartoDB 
 col_1,col_2 = st.columns(2)
 with col_1:
     with st.container(border=True):
-        fun_mapa(m, diccionario_instituciones)
-        st_folium(m, width=650)
-with col_2:
-    with st.container(border=True):
         lista_pub_pri = ['Publico', 'Privado']
         st.selectbox('Seleccionar Gestión: ', lista_pub_pri)
         objeto_localidades = ClaseLocalidad()
         datos_localidades = objeto_localidades.obtener_datos()
         dic_localidades = {row['id_localidad']:row['nombre_localidad']for row in datos_localidades}
-        st.selectbox('Seleccionar Localidad: ', dic_localidades.values())
+        lista_localidades = list(dic_localidades.values())
+        st.selectbox('Seleccionar Localidad: ', lista_localidades)
+        lista_tipo_institucion = list(df_instituciones['Tipo'])
+        st.selectbox('Seleccionar Tipo de Institución', lista_tipo_institucion)
         lista_institucion = list(df_instituciones['Nombre'])
-        st.selectbox('Seleccionar Institucion: ', lista_institucion)
+        st.selectbox('Seleccionar Institución: ', lista_institucion)
+    
+with col_2:
+    with st.container(border=True):
+            fun_mapa(m, diccionario_instituciones)
+            st_folium(m, width=650)

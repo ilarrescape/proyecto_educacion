@@ -29,8 +29,4 @@ class ClasePais:
         self.connection.commit()
         
 
-objeto = ClasePais()
 
-st.write(objeto.obtener_datos())
-diccionario = objeto.agregar_datos('Colombia')
-st.write(objeto.obtener_datos())

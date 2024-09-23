@@ -37,7 +37,8 @@ class ClaseInstitucion:
     
     def obtener_datos(self):
         consulta = """
-                    SELECT 
+                    SELECT
+                        institucion.id_institucion as "ID",
                         institucion.nombre_institucion as "Nombre",
                         direccion.calle_direccion as "Direccion",
                         direccion.numero_direccion as "N°",

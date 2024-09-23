@@ -6,6 +6,7 @@ import os
 import time
 
 from orientacion_carreras import ClaseOrientacionCarrera, DataManagerOrientacion
+from instituciones import DataManagerInstitucion, ClaseInstitucion
 load_dotenv()
 
 class ClaseCarrera:
@@ -63,8 +64,9 @@ def dialog_carrera():
     objeto_carrera = DataManagerCarrera()
     objeto_orientacion = DataManagerOrientacion()
     data_orientaciones, data_carreras = objeto_carrera.mostrar_datos()
-    col_a, col_b = st.columns([2, 3])
-
+    col_a, col_b = st.columns([2, 4])
+    with st.container(border=True):
+        col_I, col_II = st.columns([2,4])
     with st.container(border=True):
         with col_a:
             with st.container(border= True):
@@ -79,11 +81,18 @@ def dialog_carrera():
         with col_b:
             df_carreras_filtro = st.dataframe(data_carreras,
                                     use_container_width=True,
-                                    height=295,
+                                    height=370,
                                     selection_mode = "multi-row",
                                     on_select='rerun')
             data_carreras = pd.DataFrame(data_carreras)
             if df_carreras_filtro['selection']['rows']:
-                lista_filtro = df_carreras_filtro.selection['rows']
-                data_filtrada = data_carreras[data_carreras.index.isin(lista_filtro)]
-                st.write(data_filtrada)
+                with col_II:
+                    lista_filtro = df_carreras_filtro.selection['rows']
+                    data_filtrada = data_carreras[data_carreras.index.isin(lista_filtro)]
+                    st.write(data_filtrada)
+                with col_I:
+                    objeto_institucion = DataManagerInstitucion()   
+                    data_instituciones, data_localidades, data_tipo_instituciones, data_direcciones = objeto_institucion.mostrar_datos()
+                    df_instituciones = pd.DataFrame(data_instituciones)
+                    dic_instituciones = {row['Nombre']:row['ID'] for row in data_instituciones}
+                    institucion_seleccionada = st.selectbox('Seleccione Institución: ',dic_instituciones.keys())
