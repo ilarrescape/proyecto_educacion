@@ -6,6 +6,7 @@ from carreras import dialog_carrera
 def show_home():
     st.title('Bienvenido al SiGA')
     st.header('Sistema de Gestión Académica :school:')
+    st.write(st.session_state)
     st.balloons()
 
 def main():    
@@ -13,10 +14,11 @@ def main():
     
     if 'page' not in st.session_state:
         st.session_state.page = 'sesion_inicio'
+    
     st.markdown("""
         <style>
             .st-emotion-cache-1gwvy71 h1{
-                color: black;
+                color: white;
                 text-align: center;
             } 
             .st-emotion-cache-8atqhb {
@@ -24,8 +26,9 @@ def main():
                 padding-right: 1em;
                 padding-bottom:1.5em;
                 border-radius: 0.5em;
-                border: 1px solid rgba(250, 250, 250, 0.5);
-                background-color: #FFFFFF;
+                border: 1px solid rgba(0, 0, 0, 0.5);
+                background-color: #000000;
+                
             }
         </style>
     """, unsafe_allow_html=True)
