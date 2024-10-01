@@ -40,7 +40,7 @@ class ClaseInstitucion:
                     SELECT
                         institucion.id_institucion as "ID",
                         institucion.nombre_institucion as "Nombre",
-                        direccion.calle_direccion as "Direccion",
+                        direccion.calle_direccion as "Dirección",
                         direccion.numero_direccion as "N°",
                         localidad.nombre_localidad as "Localidad",
                         tipo_institucion.nombre_tipo_institucion as "Tipo",
@@ -114,7 +114,7 @@ class DataManagerInstitucion():
                         dic_tipo_institucion ={row['nombre_tipo_institucion']:row['id_tipo_institucion'] for row in  data_tipo_instituciones}
                         tipo_institucion = st.selectbox('Tipo de Institución: ', dic_tipo_institucion.keys())
                     with col_IV:
-                        lista_gestión = ['Publica','Privada']
+                        lista_gestión = ['Pública','Privada']
                         gestión_institucion = st.selectbox('Gestión: ', lista_gestión)
             with col_II:
                 with st.container(border=True):
