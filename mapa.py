@@ -75,13 +75,17 @@ def mapa_interactivo():
             lista_disciplinas = list(set(df_carreras['Disciplina']))
             lista_disciplinas.append('Todas')
             disciplina = st.selectbox('Disciplina: ', lista_disciplinas, index=len(lista_disciplinas)-1, on_change = None)
+        
         with col_VI:
             lista_modalidad = ['Virtual', 'Presencial', 'Mixta', 'Todas']
             modalidad = st.selectbox('Modalidad', lista_modalidad, index=3, on_change = None)
             lista_eliminar = ['ID_x', 'ID_y', 'id_institucion', 'id_carrera','Latitud', 'Longitud']
+        lista_carrera = list(set(df_carreras['Carrera']))
+        lista_carrera.append('Todas')
+        carrera = st.selectbox('Buscar Carrera Específica', lista_carrera, index=(len(lista_carrera)-1))
         df_visual = df_final.drop(columns=lista_eliminar)
         df_visual = df_visual.rename(columns={'modalidad_carrera':'Modalidad'})
-        df_final = cambia_dataframe(df_visual, df_final, Gestión = publico_privado, Localidad = localidad, Tipo = tipo_institucion, Nombre = institucion, Disciplina = disciplina, Modalidad = modalidad)
+        df_final = cambia_dataframe(df_visual, df_final, Gestión = publico_privado, Localidad = localidad, Tipo = tipo_institucion, Nombre = institucion, Disciplina = disciplina, Modalidad = modalidad, Carrera = carrera)
         
         if isinstance(df_final,str):
             st.warning(df_final)
